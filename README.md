@@ -12,3 +12,4 @@ Python学習用リポジトリ
 - gitignoreで管理するファイルの選定
 - venv仮想環境の構築及び概念理解
 - hello.py実行
+- 数値・文字列・len・str
