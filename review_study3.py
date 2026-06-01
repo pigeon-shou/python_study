@@ -200,3 +200,74 @@ print(type(mean_score))
 print(mean_score.reset_index())
 result = mean_score.reset_index().sort_values("score", ascending=False)
 print(result)
+
+result = (
+    df.groupby("department")["score"]
+    .agg(["mean", "max", "min", "count"])
+)
+print(result)
+
+result = (
+    df.groupby("department")["score"]
+    .agg(["mean", "max", "min", "count"])
+    .reset_index()
+)
+print(result)
+
+import pandas as pd
+
+df = pd.DataFrame({
+    "department": ["営業", "営業", "開発", "開発"],
+    "score": [80, 60, 90, 70]
+})
+
+result = (
+    df.groupby("department")["score"]
+    .agg(["mean", "max", "count"])
+    .reset_index()
+    .sort_values("max", ascending=False)
+)
+
+print(result)
+
+import pandas as pd
+
+df = pd.DataFrame({
+    "department": ["営業", "営業", "開発", "開発", "人事"],
+    "score": [80, 60, 90, 70, 95]
+})
+
+avg_70 = df[df["score"] >= 70]
+print(avg_70)
+result = (
+    avg_70.groupby("department")["score"]
+    .mean()
+    .reset_index()
+    .sort_values("score", ascending=False)
+)
+print(result)
+
+import pandas as pd
+
+users = pd.DataFrame({
+    "user_id": [1,2,3,4,5],
+    "department": ["営業","営業","開発","開発","人事"]
+})
+
+scores = pd.DataFrame({
+    "user_id": [1,2,3,4,5],
+    "score": [80,60,90,70,95]
+})
+
+df = pd.merge(users, scores, on="user_id")
+print(df)
+avg_70 = df[df["score"] >= 70]
+result = (
+    avg_70.groupby("department")["score"]
+    .agg(["mean", "max", "count"])
+    .sort_values("mean", ascending=False)
+)
+print(result.reset_index())
+
+# CSV merge groupby agg sort_value reset_index
+# agg_score=("score", "mean")のリネームを押さえる
